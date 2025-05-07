@@ -1,0 +1,49 @@
+.p-menubar {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.p-menubar-root-list {
+  background: transparent !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link {
+  padding: 0.75rem 1.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.p-menubar .p-menuitem-link:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+header {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.p-menubar {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.custom-menu-button {
+  background: linear-gradient(90deg, rgba(80,110,168,1) 0%, rgba(66,124,173,1) 35%, rgba(29,162,188,1) 100%);
+  border: none;
+  color: white !important;
+  padding: 8px 12px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s ease-in-out;
+}
+
+.custom-menu-button:hover {
+  background: rgba(29,162,188,0.8);
+}
+
+
+

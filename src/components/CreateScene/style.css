@@ -1,0 +1,35 @@
+.custom-dropdown-panel {
+    padding: 8px;
+  }
+  
+  .custom-dropdown-panel .p-dropdown-items {
+    padding-top: 12px; /* Adds spacing at the top */
+  }
+  
+  .custom-dropdown-panel .p-dropdown-item:last-child {
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .responsive-image {
+    width: 200px;
+    height: 180px;
+  }
+  
+  @media (min-width: 640px) { /* Tablets and small desktops */
+    .responsive-image {
+      width: 310px;
+      height: 280px;
+    }
+  }
+  
+  @media (min-width: 1024px) { /* Large desktops */
+    .responsive-image {
+      width: 400px;
+      height: 350px;
+    }
+  }
+  
+  
