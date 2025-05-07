@@ -138,148 +138,147 @@ const SequenceTemplate: React.FC<SequenceTemplateProps> = ({
         )}
       </div>
       <Accordion
-        multiple
-        activeIndex={activeIndex}
-        onTabChange={(e) => setActiveIndex(e.index)}
-      >
-        {sequence?.prompts?.data?.frames?.map((prompt, index) => (
-          <AccordionTab
-            key={prompt.id}
-            onDragStart={() => handleDragStart(index)}
-            onDragEnter={() => handleDragEnter(index)}
-            onDragEnd={handleDragEnd}
-            draggable
-            headerTemplate={
-              <div className="flex flex-column md:flex-row justify-content-between align-items-center w-full">
-                <span className="text-gray-700 text-lg font-medium text-center md:text-left">
-                  {prompt.prompt}
-                </span>
-                <div className="flex mt-2 md:mt-0">
-                  {loadingPromptId &&
-                  String(loadingPromptId).split(",").includes(String(prompt.id)) ? (
-                    <ProgressSpinner
-                      style={{ width: "20px", height: "20px" }}
-                      strokeWidth="4"
-                      animationDuration=".5s"
-                    />
-                  ) : (
-                    <>
-                      <Button
-                        tooltip="Delete Prompt"
-                        icon="pi pi-trash"
-                        className="p-button-rounded p-button-text text-red-600"
-                        onClick={(e) => handleDeletePrompt(e, prompt.id)}
-                      />
-                      <Button
-                        tooltip="Copy Prompt"
-                        icon="pi pi-copy"
-                        className="p-button-rounded p-button-text text-blue-600"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCopyPrompt(prompt.prompt);
-                        }}
-                      />
-                      <Button
-                        tooltip="Generate Image"
-                        icon="pi pi-camera"
-                        className="p-button-rounded p-button-text text-green-600"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCreateMidJourneyImages(prompt.id);
-                        }}
-                      />
-                      <Button
-                        tooltip="Regenerate Image"
-                        icon="pi pi-sync"
-                        className="p-button-rounded p-button-text text-green-600"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleReGenerateMidJourneyImages(prompt.id);
-                        }}
-                      />
-                      <Button
-                        tooltip="Update Prompt"
-                        icon="pi pi-pencil"
-                        className="p-button-rounded p-button-text text-orange-400"
-                        onClick={() => handleUpdatePromptForm(prompt.id, index)}
-                      />
-                    </>
-                  )}
-                </div>
-              </div>
-            }
-          >
-            <Dialog
-              visible={deleteModalVisible}
-              onHide={() => setDeleteModalVisible(false)}
-              header="Confirm Delete"
-              footer={
-                <div className="flex align-items-center justify-content-center space-x-2">
-                  <Button
-                    label="No"
-                    icon="pi pi-times"
-                    onClick={cancelDelete}
-                    className="p-button-text"
-                  />
-                  <Button
-                    label="Yes"
-                    icon="pi pi-check"
-                    onClick={confirmDelete}
-                    className="p-button-danger"
-                    autoFocus
-                  />
-                </div>
-              }
-            >
-              <p className="text-gray-700">
-                Are you sure you want to delete this prompt?
-              </p>
-            </Dialog>
-
-            {loadingPromptId === prompt.id ? (
-              <p className="text-gray-500 text-sm text-center mt-2">
-                Loading images...
-              </p>
-            ) : loadingVariation ? (
-              <p className="text-gray-500 text-sm text-center mt-2">
-                Loading variation...
-              </p>
-            ) : selectedImages[prompt?.id]?.length > 0 ? (
-              <div
-                className="grid text-center overflow-auto"
-                style={{ maxHeight: "590px" }}
-              >
-                {selectedImages[prompt?.id]?.map((image) => (
-                  <div key={image.id} className="col-12 lg:col-3 sm:col-6">
-                    <MidJourneyImages
-                      image={image}
-                      promptId={prompt?.id}
-                      handleDeleteImage={handleDeleteImage}
-                      handleImageVariation={handleImageVariation}
-                    />
-                  </div>
-                ))}
-              </div>
+  multiple
+  activeIndex={activeIndex}
+  onTabChange={(e) => setActiveIndex(e.index)}
+>
+  {sequence?.prompts?.data?.frames?.map((prompt, index) => (
+    <AccordionTab
+      key={prompt.id}
+      headerTemplate={
+        <div
+          className="flex flex-column md:flex-row justify-content-between align-items-center w-full"
+          draggable
+          onDragStart={() => handleDragStart(index)}
+          onDragEnter={() => handleDragEnter(index)}
+          onDragEnd={handleDragEnd}
+        >
+          <span className="text-gray-700 text-lg font-medium text-center md:text-left">
+            {prompt.prompt}
+          </span>
+          <div className="flex mt-2 md:mt-0">
+            {loadingPromptId &&
+            String(loadingPromptId).split(",").includes(String(prompt.id)) ? (
+              <ProgressSpinner
+                style={{ width: "20px", height: "20px" }}
+                strokeWidth="4"
+                animationDuration=".5s"
+              />
             ) : (
-              <p className="text-gray-500 text-sm text-center mt-2">
-                {selectedImages[prompt?.id] === undefined ? (
-                  <>
-                    No images available yet.. Click the{" "}
-                    <span className="text-green-600 font-medium">Camera</span>{" "}
-                    icon to generate images.
-                  </>
-                ) : (
-                  <>
-                    Images have been{" "}
-                    <span className="text-red-600 font-medium">deleted</span>.
-                    Update the prompt to create new images.
-                  </>
-                )}
-              </p>
+              <>
+                <Button
+                  tooltip="Delete Prompt"
+                  icon="pi pi-trash"
+                  className="p-button-rounded p-button-text text-red-600"
+                  onClick={(e) => handleDeletePrompt(e, prompt.id)}
+                />
+                <Button
+                  tooltip="Copy Prompt"
+                  icon="pi pi-copy"
+                  className="p-button-rounded p-button-text text-blue-600"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopyPrompt(prompt.prompt);
+                  }}
+                />
+                <Button
+                  tooltip="Generate Image"
+                  icon="pi pi-camera"
+                  className="p-button-rounded p-button-text text-green-600"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCreateMidJourneyImages(prompt.id);
+                  }}
+                />
+                <Button
+                  tooltip="Regenerate Image"
+                  icon="pi pi-sync"
+                  className="p-button-rounded p-button-text text-green-600"
+                  onClick={() => {
+                    handleReGenerateMidJourneyImages(prompt.id);
+                  }}
+                />
+                <Button
+                  tooltip="Update Prompt"
+                  icon="pi pi-pencil"
+                  className="p-button-rounded p-button-text text-orange-400"
+                  onClick={() => handleUpdatePromptForm(prompt.id, index)}
+                />
+              </>
             )}
-          </AccordionTab>
-        ))}
-      </Accordion>
+          </div>
+        </div>
+      }
+    >
+      <Dialog
+        visible={deleteModalVisible}
+        onHide={() => setDeleteModalVisible(false)}
+        header="Confirm Delete"
+        footer={
+          <div className="flex align-items-center justify-content-center space-x-2">
+            <Button
+              label="No"
+              icon="pi pi-times"
+              onClick={cancelDelete}
+              className="p-button-text"
+            />
+            <Button
+              label="Yes"
+              icon="pi pi-check"
+              onClick={confirmDelete}
+              className="p-button-danger"
+              autoFocus
+            />
+          </div>
+        }
+      >
+        <p className="text-gray-700">
+          Are you sure you want to delete this prompt?
+        </p>
+      </Dialog>
+
+      {loadingPromptId === prompt.id ? (
+        <p className="text-gray-500 text-sm text-center mt-2">
+          Loading images...
+        </p>
+      ) : loadingVariation ? (
+        <p className="text-gray-500 text-sm text-center mt-2">
+          Loading variation...
+        </p>
+      ) : selectedImages[prompt?.id]?.length > 0 ? (
+        <div
+          className="grid text-center overflow-auto"
+          style={{ maxHeight: "590px" }}
+        >
+          {selectedImages[prompt?.id]?.map((image) => (
+            <div key={image.id} className="col-12 lg:col-3 sm:col-6">
+              <MidJourneyImages
+                image={image}
+                promptId={prompt?.id}
+                handleDeleteImage={handleDeleteImage}
+                handleImageVariation={handleImageVariation}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-gray-500 text-sm text-center mt-2">
+          {selectedImages[prompt?.id] === undefined ? (
+            <>
+              No images available yet.. Click the{" "}
+              <span className="text-green-600 font-medium">Camera</span> icon to generate images.
+            </>
+          ) : (
+            <>
+              Images have been{" "}
+              <span className="text-red-600 font-medium">deleted</span>. Update the prompt to create new images.
+            </>
+          )}
+        </p>
+      )}
+    </AccordionTab>
+  ))}
+</Accordion>
     </div>
   );
 };
