@@ -147,7 +147,7 @@ const SequenceTemplate: React.FC<SequenceTemplateProps> = ({
       key={prompt.id}
       headerTemplate={
         <div
-          className="flex flex-column md:flex-row justify-content-between align-items-center w-full"
+          className="draggable-header flex flex-column md:flex-row justify-content-between align-items-center w-full"
           draggable
           onDragStart={() => handleDragStart(index)}
           onDragEnter={() => handleDragEnter(index)}

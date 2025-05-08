@@ -59,3 +59,10 @@ html {
   -webkit-text-fill-color: transparent; /* For Safari */
 }
 
+.draggable-header {
+  cursor: grab !important;
+}
+
+.draggable-header:active {
+  cursor: grabbing !important;
+}
